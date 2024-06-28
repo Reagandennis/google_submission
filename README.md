@@ -1,4 +1,4 @@
-# google_submission
+# Google_submission for the Gemmini Project
 
 A new Flutter project.
 
