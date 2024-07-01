@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     if (response.statusCode == 200 && response.body == 'Login successful') {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => Homepage(username: _usernameController.text)),
       );
