@@ -1,10 +1,68 @@
-// ignore_for_file: file_names, prefer_const_constructors
-
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:google_submission/screens/LoginPage.dart';
+import 'package:http/http.dart' as http;
+import 'LoginPage.dart';
 
-class SignupPage extends StatelessWidget {
+class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
+
+  @override
+  _SignupPageState createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+
+  Future<void> _signup() async {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      _showMessage('Passwords do not match');
+      return;
+    }
+
+    final response = await http.post(
+      Uri.parse('http://192.168.0.227:8080/signup'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': _usernameController.text,
+        'email': _emailController.text,
+        'password': _passwordController.text,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      _showMessage('Signup successful');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginPage()),
+      );
+    } else {
+      _showMessage('Failed to sign up: ${response.body}');
+    }
+  }
+
+  void _showMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +101,7 @@ class SignupPage extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     TextField(
+                      controller: _usernameController,
                       decoration: InputDecoration(
                         hintText: "Username",
                         border: OutlineInputBorder(
@@ -56,6 +115,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         hintText: "Email",
                         border: OutlineInputBorder(
@@ -69,6 +129,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller: _passwordController,
                       decoration: InputDecoration(
                         hintText: "Password",
                         border: OutlineInputBorder(
@@ -83,6 +144,7 @@ class SignupPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     TextField(
+                      controller: _confirmPasswordController,
                       decoration: InputDecoration(
                         hintText: "Confirm Password",
                         border: OutlineInputBorder(
@@ -100,9 +162,7 @@ class SignupPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(top: 3, left: 3),
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Navigate to the next page or perform signup logic
-                    },
+                    onPressed: _signup,
                     child: const Text(
                       "Sign up",
                       style: TextStyle(fontSize: 20),

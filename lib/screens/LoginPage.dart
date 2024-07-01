@@ -1,8 +1,60 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:google_submission/screens/SignupPage.dart';
+import 'package:google_submission/screens/HomePage.dart';
+import 'package:http/http.dart' as http;
+import 'SignupPage.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  Future<void> _login() async {
+    final response = await http.post(
+      Uri.parse('http://192.168.0.227:8080/login'), // Replace with your IP address
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'username': _usernameController.text,
+        'password': _passwordController.text,
+      }),
+    );
+
+    if (response.statusCode == 200 && response.body == 'Login successful') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Homepage()),
+      );
+    } else {
+      _showMessage('Failed to login: ${response.body}');
+    }
+  }
+
+  void _showMessage(String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +86,7 @@ class LoginPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         TextField(
+          controller: _usernameController,
           decoration: InputDecoration(
               hintText: "Username",
               border: OutlineInputBorder(
@@ -45,6 +98,7 @@ class LoginPage extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         TextField(
+          controller: _passwordController,
           decoration: InputDecoration(
             hintText: "Password",
             border: OutlineInputBorder(
@@ -58,9 +112,7 @@ class LoginPage extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: () {
-            // Define the login logic here
-          },
+          onPressed: _login,
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
