@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:google_submission/screens/HomePage.dart';
 import 'package:http/http.dart' as http;
 import 'SignupPage.dart';
+import 'Homepage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
     if (response.statusCode == 200 && response.body == 'Login successful') {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Homepage()),
+        MaterialPageRoute(builder: (context) => Homepage(username: _usernameController.text)),
       );
     } else {
       _showMessage('Failed to login: ${response.body}');
