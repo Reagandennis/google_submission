@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -93,7 +95,8 @@ class _SignupPageState extends State<SignupPage> {
                       "Create your account",
                       style: TextStyle(
                         fontSize: 15,
-                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
                   ],
@@ -108,7 +111,7 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(18),
                           borderSide: BorderSide.none,
                         ),
-                        fillColor: Colors.purple.withOpacity(0.1),
+                        fillColor: Color.fromARGB(255, 32, 131, 40).withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.person),
                       ),
@@ -122,7 +125,7 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(18),
                           borderSide: BorderSide.none,
                         ),
-                        fillColor: Colors.purple.withOpacity(0.1),
+                        fillColor: Color.fromARGB(255, 32, 131, 40).withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.email),
                       ),
@@ -136,7 +139,7 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(18),
                           borderSide: BorderSide.none,
                         ),
-                        fillColor: Colors.purple.withOpacity(0.1),
+                        fillColor: Color.fromARGB(255, 32, 131, 40).withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.lock),
                       ),
@@ -151,7 +154,7 @@ class _SignupPageState extends State<SignupPage> {
                           borderRadius: BorderRadius.circular(18),
                           borderSide: BorderSide.none,
                         ),
-                        fillColor: Colors.purple.withOpacity(0.1),
+                        fillColor: Color.fromARGB(255, 32, 131, 40).withOpacity(0.1),
                         filled: true,
                         prefixIcon: const Icon(Icons.lock),
                       ),
@@ -170,7 +173,7 @@ class _SignupPageState extends State<SignupPage> {
                     style: ElevatedButton.styleFrom(
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      backgroundColor: Colors.purple,
+                      backgroundColor: Colors.lightGreenAccent,
                     ),
                   ),
                 ),
@@ -179,7 +182,7 @@ class _SignupPageState extends State<SignupPage> {
                   height: 45,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
-                    border: Border.all(color: Colors.purple),
+                    border: Border.all(color: Colors.lightGreen),
                     boxShadow: const [
                       BoxShadow(
                         color: Colors.white,
@@ -212,7 +215,7 @@ class _SignupPageState extends State<SignupPage> {
                           "Sign In with Google",
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.purple,
+                            color: Color.fromARGB(255, 1, 69, 21),
                           ),
                         ),
                       ],
@@ -222,7 +225,13 @@ class _SignupPageState extends State<SignupPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const Text("Already have an account?"),
+                    const Text("Already have an account?",  
+                    style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                    ),),
+                   
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -232,7 +241,10 @@ class _SignupPageState extends State<SignupPage> {
                       },
                       child: const Text(
                         "Login",
-                        style: TextStyle(color: Colors.purple),
+                        style: TextStyle(color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

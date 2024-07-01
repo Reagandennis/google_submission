@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,  // Disables the debug banner for cleaner UI
       title: 'My Flutter App',
       theme: ThemeData(
-        primarySwatch: Colors.purple,  // Set a primary color or theme for the app
+        fontFamily: 'Roboto',
+        primarySwatch: Colors.blue,
       ),
       home: const SignupPage(),  // Sets the SignupPage as the home screen
     );

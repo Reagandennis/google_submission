@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none),
-              fillColor: Colors.purple.withOpacity(0.1),
+              fillColor: Color.fromARGB(255, 32, 131, 40).withOpacity(0.1),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
         ),
@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(18),
                 borderSide: BorderSide.none),
-            fillColor: Colors.purple.withOpacity(0.1),
+            fillColor: Color.fromARGB(255, 32, 131, 40).withOpacity(0.1),
             filled: true,
             prefixIcon: const Icon(Icons.lock_outline),
           ),
@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
-            backgroundColor: Colors.purple,
+            backgroundColor: Color.fromARGB(255, 32, 131, 40),
           ),
           child: const Text(
             "Login",
@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () {
         // Define forgot password functionality
       },
-      child: const Text("Forgot password?", style: TextStyle(color: Colors.purple)),
+      child: const Text("Forgot password?", style: TextStyle(color: Color.fromARGB(255, 32, 131, 40))),
     );
   }
 
@@ -148,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                 MaterialPageRoute(builder: (context) => const SignupPage()),
               );
             },
-            child: const Text("Sign Up", style: TextStyle(color: Colors.purple)))
+            child: const Text("Sign Up", style: TextStyle(color: Color.fromARGB(255, 32, 131, 40))))
       ],
     );
   }
